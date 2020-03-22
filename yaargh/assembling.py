@@ -19,8 +19,8 @@ from collections import OrderedDict
 import sys
 import warnings
 
-from argh.completion import COMPLETION_ENABLED
-from argh.constants import (
+from .completion import COMPLETION_ENABLED
+from .constants import (
     ATTR_ALIASES,
     ATTR_ARGS,
     ATTR_NAME,
@@ -29,8 +29,8 @@ from argh.constants import (
     DEFAULT_ARGUMENT_TEMPLATE,
     DEST_FUNCTION,
 )
-from argh.utils import get_subparsers, get_arg_spec
-from argh.exceptions import AssemblingError
+from .utils import get_subparsers, get_arg_spec
+from .exceptions import AssemblingError
 
 
 __all__ = [

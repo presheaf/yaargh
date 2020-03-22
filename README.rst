@@ -1,32 +1,35 @@
-Argh: The Natural CLI
-=====================
+Yaargh: Yet Another Argh
+========================
 
-.. image:: https://img.shields.io/coveralls/neithere/argh.svg
-    :target: https://coveralls.io/r/neithere/argh
+Yaargh is a fork of Argh (https://github.com/neithere/argh/).
 
-.. image:: https://img.shields.io/travis/neithere/argh.svg
-    :target: https://travis-ci.org/neithere/argh
+Why fork?
+---------
 
-.. image:: https://img.shields.io/pypi/format/argh.svg
-    :target: https://pypi.python.org/pypi/argh
+The argh project is no longer maintained (https://github.com/neithere/argh/issues/124#issuecomment-383645696).
+This project will attempt to fix issues and make improvements to the original project.
+The intent is for all these changes to be made back to the original argh project
+when that becomes possible, and for yaargh to act as a replacement until it is.
 
-.. image:: https://img.shields.io/pypi/status/argh.svg
-    :target: https://pypi.python.org/pypi/argh
+You can use yaargh as a drop-in replacement for argh (`import yaargh as argh`)
+though see Compatability below.
 
-.. image:: https://img.shields.io/pypi/v/argh.svg
-    :target: https://pypi.python.org/pypi/argh
+Compatability
+-------------
 
-.. image:: https://img.shields.io/pypi/pyversions/argh.svg
-    :target: https://pypi.python.org/pypi/argh
+While yaargh strives to maintain backwards compatability with argh and its existing behavior,
+the nature of a library like `argh` with a large amount of "magic" behavior and defaults
+means that what we consider the best default may change from version to version. For example,
+help text wording may change.
 
-.. image:: https://img.shields.io/pypi/dd/argh.svg
-    :target: https://pypi.python.org/pypi/argh
+In addition, there is behavior that is almost always a bug but that it is technically possible
+some users rely on.
 
-.. image:: https://readthedocs.org/projects/argh/badge/?version=stable
-    :target: http://argh.readthedocs.org/en/stable/
+Both kinds of compatability breaks will be listed below as they are made,
+as well as in CHANGES.
 
-.. image:: https://readthedocs.org/projects/argh/badge/?version=latest
-    :target: http://argh.readthedocs.org/en/latest/
+Original README
+---------------
 
 Building a command-line interface?  Found yourself uttering "argh!" while
 struggling with the API of `argparse`?  Don't like the complexity but need

@@ -34,7 +34,7 @@ else:
     # Python 2.7, 3.x
     #
     install_requires = []
-    from argh import __version__
+    from yaargh import __version__
 
 
 with io.open(os.path.join(os.path.dirname(__file__), 'README.rst'),
@@ -59,14 +59,14 @@ class PyTest(TestCommand):
 
 setup(
     # overview
-    name = 'argh',
+    name = 'yaargh',
     description = 'An unobtrusive argparse wrapper with natural syntax',
     long_description = readme,
 
     # technical info
     version = __version__,
-    packages = ['argh'],
-    provides = ['argh'],
+    packages = ['yaargh'],
+    provides = ['yaargh'],
     install_requires = install_requires,
 
     # testing
@@ -79,7 +79,9 @@ setup(
     license = 'GNU Lesser General Public License (LGPL), Version 3',
 
     # more info
-    url = 'http://github.com/neithere/argh/',
+    url = 'http://github.com/ekimekim/yaargh/',
+    maintainer = 'Mike Lang',
+    maintainer_email = 'mikelang3000+yaargh@gmail.com',
 
     # categorization
     keywords     = ('cli command line argparse optparse argument option'),

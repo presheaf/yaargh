@@ -5,7 +5,8 @@ Here is an inevitably incomplete list of contributors, i.e. people who have
 suggested features, reported bugs, submitted patches, wrote packaging scripts
 and generally made *Argh* better:
 
-:Andrey Mikhaylenko:  Author, Maintainer
+:Andrey Mikhaylenko:  Original Author
+:Michael Lang:        yaargh Fork Author and Maintainer
 :Gora Khargosh:       Bug reports
 :Mika Eloranta:       Patches
 :Fabien Devaux:       ArchLinux package
