@@ -14,6 +14,10 @@ when that becomes possible, and for yaargh to act as a replacement until it is.
 You can use yaargh as a drop-in replacement for argh (`import yaargh as argh`)
 though see Compatability below.
 
+In order to support using yaargh automatically even in applications where you can't easily change
+the code, the optional feature `yaargh[import-argh]` will add a dummy `argh` module such that
+`import argh` will use `yaargh`.
+
 Compatability
 -------------
 

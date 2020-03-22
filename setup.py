@@ -68,6 +68,9 @@ setup(
     packages = ['yaargh'],
     provides = ['yaargh'],
     install_requires = install_requires,
+    extras_require = {
+        "import-argh": ["yaargh-dummy-argh"],
+    },
 
     # testing
     tests_require = ['pytest', 'mock', 'iocapture'],
