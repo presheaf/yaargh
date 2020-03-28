@@ -215,12 +215,13 @@ def test_annotation():
     # screaming and cursing as it is completely in the dark about the
     # sweetness of annotations and we can but tolerate its ignorance.
     ns = {}
-    exec("def cmd(foo : 'quux' = 123):\n    'bar'\npass", None, ns)
+    exec("def cmd(foo : 'quux' = 123, *bar : 'abc'):\n    'bar'\npass", None, ns)
     cmd = ns['cmd']
     p = argh.ArghParser()
     p.set_default_command(cmd)
     prog_help = p.format_help()
     assert 'quux' in prog_help
+    assert 'abc' in prog_help
 
 
 def test_kwonlyargs():
