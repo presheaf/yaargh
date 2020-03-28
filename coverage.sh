@@ -1,2 +1,2 @@
-py.test --cov argh --cov-report term --cov-report html "$@" \
-    && uzbl-browser htmlcov/index.html
+py.test --cov yaargh --cov-report term --cov-report html "$@" \
+    && xdg-open htmlcov/index.html
