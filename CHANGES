@@ -2,6 +2,14 @@
 Changelog
 ~~~~~~~~~
 
+Version 0.28.0dev
+--------------
+
+Fixed bugs:
+
+- ``str`` annotations on ``*args`` would not result in the string being set as the help message,
+  as intended and as was already the case for normal args (PR #3).
+
 Version 0.27.1
 -----------
 

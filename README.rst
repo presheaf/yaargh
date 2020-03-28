@@ -29,8 +29,12 @@ help text wording may change.
 In addition, there is behavior that is almost always a bug but that it is technically possible
 some users rely on.
 
-Both kinds of compatability breaks will be listed below as they are made,
-as well as in CHANGES.
+Both kinds of compatability breaks are listed below:
+
+- If a function's type signature included a ``*varargs`` argument with an annotation of
+  type ``str``, this annotation previously was ignored. Now, that annotation will be used
+  as a help string. In almost all cases this should be fixing behavior to match user intent,
+  but it will technically result in different ``--help`` output.
 
 Original README
 ---------------
