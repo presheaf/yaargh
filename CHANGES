@@ -5,6 +5,10 @@ Changelog
 Version 0.28.0dev
 --------------
 
+Enhancements:
+
+- Added support for Python 3.6, 3.7 and 3.8
+
 Fixed bugs:
 
 - ``str`` annotations on ``*args`` would not result in the string being set as the help message,
