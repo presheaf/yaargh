@@ -115,6 +115,8 @@ def dispatch(parser, argv=None, add_help_command=True,
 
         If `True`, unknown arguments do not cause an error
         (`ArgumentParser.parse_known_args` is used).
+        Any unknown arguments found are put in `namespace._unknown_args`.
+        Use `@expects_obj` to access them.
 
     :param namespace:
 

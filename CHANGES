@@ -8,11 +8,15 @@ Version 0.28.0dev
 Enhancements:
 
 - Added support for Python 3.6, 3.7 and 3.8
+- When using `skip_unknown_args=True`, not only does this now work as intended
+  (see bugfixes below) but in addition it stashes the unknown args in ``namespace._unknown_args``,
+  where they can be accessed by functions annotated with ``@expects_obj``.
 
 Fixed bugs:
 
 - ``str`` annotations on ``*args`` would not result in the string being set as the help message,
   as intended and as was already the case for normal args (PR #3).
+- The `skip_unknown_args` option was broken and would always error
 
 Version 0.27.1
 -----------
