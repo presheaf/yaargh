@@ -130,6 +130,9 @@ def dispatch(parser, argv=None, add_help_command=True,
     which is interpreted as an expected event so the traceback is hidden.
     You can also mark arbitrary exceptions as "wrappable" by using the
     :func:`~argh.decorators.wrap_errors` decorator.
+
+    Wrapped exceptions, or other "expected errors" like parse failures,
+    will cause a SystemExit to be raised.
     """
     if completion:
         autocomplete(parser)
@@ -173,6 +176,7 @@ def dispatch(parser, argv=None, add_help_command=True,
         # normally this is stdout; can be any file
         f = output_file
 
+    # this may raise user exceptions, or SystemExit for wrapped exceptions
     for line in lines:
         # print the line as soon as it is generated to ensure that it is
         # displayed to the user before anything else happens, e.g.
@@ -216,7 +220,7 @@ def _execute_command(function, namespace_obj, errors_file, pre_call=None):
     Yields the results line by line.
 
     If :class:`~argh.exceptions.CommandError` is raised, its message is
-    written to the error file.
+    written to the error file, and a SystemExit is raised.
     All other exceptions propagate unless marked as wrappable
     by :func:`wrap_errors`.
     """
@@ -284,6 +288,7 @@ def _execute_command(function, namespace_obj, errors_file, pre_call=None):
 
         errors_file.write(compat.text_type(processor(e)))
         errors_file.write('\n')
+        sys.exit()
 
 
 def dispatch_command(function, *args, **kwargs):

@@ -5,6 +5,11 @@ Changelog
 Version 0.28.0dev
 --------------
 
+Backwards incompatible changes:
+
+- Wrapped exceptions now cause ``dispatching.dispatch()`` to raise ``SystemExit``
+  instead of returning without error.
+
 Enhancements:
 
 - Added support for Python 3.6, 3.7 and 3.8

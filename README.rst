@@ -36,6 +36,14 @@ Both kinds of compatability breaks are listed below:
   as a help string. In almost all cases this should be fixing behavior to match user intent,
   but it will technically result in different ``--help`` output.
 
+- Previously, if a function raised a ``yaargh.CommandError`` or an error explicitly marked as wrapped,
+  then ``yaargh.dispatch()`` (and by extension ``yaargh.dispatch_command()`` and ``yaargh.dispatch_commands()``)
+  would write the error message to the given ``error_file`` (by default ``sys.stderr``), then
+  return. It now raises a SystemExit instead of returning. In almost all cases, ``dispatch()`` is
+  the last thing the program does anyway, and parsing failures already caused a SystemExit to be
+  raised so most users who need to do something after error will already be catching it.
+  This is a signifigant break but is nessecary to allow non-zero exit codes for failed commands.
+
 Original README
 ---------------
 
