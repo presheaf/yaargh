@@ -32,7 +32,7 @@ def test_set_default_command_integration():
 
     assert run(p, '') == R(out='1\n', err='')
     assert run(p, '--foo 2') == R(out='2\n', err='')
-    assert run(p, '--help', exit=True) == None
+    assert run(p, '--help', exit=True) == 0
 
 
 def test_set_default_command_integration_merging():
@@ -463,7 +463,7 @@ def test_bare_namespace():
         assert run(p, 'greet', exit=True) == 'too few arguments'
     else:
         # Python since 3.3 returns a help message and doesn't exit
-        assert 'usage:' in run(p, 'greet', exit=True).out
+        assert 'usage:' in run(p, 'greet').out
 
     # with an argument
 
@@ -535,13 +535,13 @@ def test_help_alias():
 
     # assert the commands don't fail
 
-    assert None == run(p, '--help', exit=True)
-    assert None == run(p, 'greet --help', exit=True)
-    assert None == run(p, 'greet hello --help', exit=True)
+    assert 0 == run(p, '--help', exit=True)
+    assert 0 == run(p, 'greet --help', exit=True)
+    assert 0 == run(p, 'greet hello --help', exit=True)
 
-    assert None == run(p, 'help', exit=True)
-    assert None == run(p, 'help greet', exit=True)
-    assert None == run(p, 'help greet hello', exit=True)
+    assert 0 == run(p, 'help', exit=True)
+    assert 0 == run(p, 'help greet', exit=True)
+    assert 0 == run(p, 'help greet hello', exit=True)
 
 
 def test_arg_order():
@@ -773,7 +773,7 @@ def test_prog():
     usage = get_usage_string()
 
     with iocapture.capture() as captured:
-        assert run(p, '-h', exit=True) == None
+        assert run(p, '-h', exit=True) == 0
         assert captured.stdout.startswith(usage)
 
 
