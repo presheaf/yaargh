@@ -18,6 +18,14 @@ In order to support using yaargh automatically even in applications where you ca
 the code, the optional feature `yaargh[import-argh]` will add a dummy `argh` module such that
 `import argh` will use `yaargh`.
 
+Highlights
+----------
+
+The most signifigant differences from ``argh``, and reasons you may prefer to use it:
+
+- Commands that fail with a ``CommandError`` now exit with status ``1`` (failure) instead of
+  status ``0`` (success). This is extremely important when used in scripts.
+
 Compatability
 -------------
 
@@ -43,6 +51,13 @@ Both kinds of compatability breaks are listed below:
   the last thing the program does anyway, and parsing failures already caused a SystemExit to be
   raised so most users who need to do something after error will already be catching it.
   This is a signifigant break but is nessecary to allow non-zero exit codes for failed commands.
+
+- Related to the above, commands that fail with a ``yaargh.CommandError`` or other wrapped error
+  will now exit with status ``1``, indicating failure. Previously, unless the user did something to avoid it,
+  the command would have returned from ``yaargh.dispatch()`` and subsequently exited success.
+  In the vast majority of cases this would have been a latent bug likely to cause havoc in scripts
+  or other systems which rely on status code to check if a command succeeded.
+  You can use ``CommandError(message, code=0)`` to restore the previous behavior.
 
 Original README
 ---------------

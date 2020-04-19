@@ -7,8 +7,9 @@ Version 0.28.0dev
 
 Backwards incompatible changes:
 
-- Wrapped exceptions now cause ``dispatching.dispatch()`` to raise ``SystemExit``
-  instead of returning without error.
+- Wrapped exceptions now cause ``dispatching.dispatch()`` to raise ``SystemExit(1)``
+  instead of returning without error. For most users, this means failed commands
+  will now exit with a failure status instead of a success.
 
 Enhancements:
 
@@ -16,6 +17,8 @@ Enhancements:
 - When using `skip_unknown_args=True`, not only does this now work as intended
   (see bugfixes below) but in addition it stashes the unknown args in ``namespace._unknown_args``,
   where they can be accessed by functions annotated with ``@expects_obj``.
+- Can control exit status (see Backwards Incompatible Changes above) when raising ``CommandError``
+  using the ``code`` keyword arg.
 
 Fixed bugs:
 
