@@ -298,7 +298,7 @@ class TestErrorWrapping:
         p.set_default_command(wrapped_parrot)
 
         assert run(p, '') == R('beautiful plumage\n', '')
-        assert run(p, '--dead') == R('', 'ValueError: this parrot is no more\n')
+        assert run(p, '--dead') == R('', 'ValueError: this parrot is no more\n', exit=1)
 
     def test_processor(self):
         parrot = self._get_parrot()
@@ -311,7 +311,7 @@ class TestErrorWrapping:
         p = argh.ArghParser()
         p.set_default_command(processed_parrot)
 
-        assert run(p, '--dead') == R('', 'ERR: this parrot is no more!\n')
+        assert run(p, '--dead') == R('', 'ERR: this parrot is no more!\n', exit=1)
 
     def test_stderr_vs_stdout(self):
 
@@ -324,7 +324,7 @@ class TestErrorWrapping:
         p.set_default_command(func)
 
         assert run(p, 'a') == R(out='1\n', err='')
-        assert run(p, 'b') == R(out='', err="KeyError: 'b'\n")
+        assert run(p, 'b') == R(out='', err="KeyError: 'b'\n", exit=1)
 
 
 def test_argv():
@@ -583,8 +583,8 @@ def test_output_file():
 
 def test_command_error():
 
-    def whiner_plain():
-        raise argh.CommandError('I feel depressed.')
+    def whiner_plain(code=1):
+        raise argh.CommandError('I feel depressed.', code=code)
 
     def whiner_iterable():
         yield 'Hello...'
@@ -594,9 +594,11 @@ def test_command_error():
     p.add_commands([whiner_plain, whiner_iterable])
 
     assert run(p, 'whiner-plain') == R(
-        out='', err='CommandError: I feel depressed.\n')
+        out='', err='CommandError: I feel depressed.\n', exit=1)
+    assert run(p, 'whiner-plain --code=127') == R(
+        out='', err='CommandError: I feel depressed.\n', exit=127)
     assert run(p, 'whiner-iterable') == R(
-        out='Hello...\n', err='CommandError: I feel depressed.\n')
+        out='Hello...\n', err='CommandError: I feel depressed.\n', exit=1)
 
 
 def test_custom_namespace():
