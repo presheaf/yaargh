@@ -14,7 +14,7 @@ Utilities
 """
 import argparse
 import inspect
-
+import distutils.util
 from . import compat
 
 
@@ -55,3 +55,8 @@ def get_arg_spec(function):
     if inspect.ismethod(function):
         spec = spec._replace(args=spec.args[1:])
     return spec
+
+
+def str_to_bool(s):
+    return bool(distutils.util.strtobool(s))
+str_to_bool.__name__ = 'bool'   # make argparse errors informative

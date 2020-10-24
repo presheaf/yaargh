@@ -9,6 +9,7 @@
 #  Software Foundation. See the file README.rst for copying conditions.
 #
 import argparse
+from .utils import str_to_bool
 
 __all__ = (
     'ATTR_NAME', 'ATTR_ALIASES', 'ATTR_ARGS', 'ATTR_WRAPPED_EXCEPTIONS',
@@ -50,8 +51,14 @@ ARG_DOC_DICT = 'argh_doc_dict'
 #: dest name for a function mapped to given endpoint (goes to Namespace obj)
 DEST_FUNCTION = 'function'
 
-#: list of type annotations to use for marking argument types
-PARSED_TYPEHINTS = [int, float, str, bool]
+#: type annotations to use for marking argument types and associated converters
+
+PARSED_TYPEHINTS = {
+    int: int,
+    float: float,
+    str: str,
+    bool: str_to_bool
+}
 
 #
 # Other library-wide stuff

@@ -97,7 +97,7 @@ def _get_args_from_signature(function):
                 akwargs.update(help=val)
             elif val in PARSED_TYPEHINTS:
                 # typed arg:     func(a : int) -> add_argument("a", type=int)
-                akwargs.update(type=val)
+                akwargs.update(type=PARSED_TYPEHINTS[val])
 
         if name in defaults or name in kwonly:
             if name in defaults:
