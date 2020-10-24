@@ -13,12 +13,12 @@ Command decorators
 ~~~~~~~~~~~~~~~~~~
 """
 from .constants import (ATTR_ALIASES, ATTR_ARGS, ATTR_NAME,
-                        ATTR_WRAPPED_EXCEPTIONS,
+                        ATTR_WRAPPED_EXCEPTIONS, ARG_DOC_DICT,
                         ATTR_WRAPPED_EXCEPTIONS_PROCESSOR,
                         ATTR_EXPECTS_NAMESPACE_OBJECT)
 
 
-__all__ = ['aliases', 'named', 'arg', 'wrap_errors', 'expects_obj']
+__all__ = ['aliases', 'named', 'arg', 'argdoc', 'wrap_errors', 'expects_obj']
 
 
 def named(new_name):
@@ -69,6 +69,23 @@ def aliases(*names):
     """
     def wrapper(func):
         setattr(func, ATTR_ALIASES, names)
+        return func
+    return wrapper
+
+
+def argdoc(helpdict):
+    """
+    Adds argument help to a function.
+
+    Usage::
+
+        @argdoc({'x': 'a positive integer',
+                 'y': 'any number you want')
+        def func(x, y):
+            return sqrt(x) + y
+    """
+    def wrapper(func):
+        setattr(func, ARG_DOC_DICT, helpdict)
         return func
     return wrapper
 

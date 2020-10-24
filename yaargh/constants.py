@@ -14,6 +14,7 @@ __all__ = (
     'ATTR_NAME', 'ATTR_ALIASES', 'ATTR_ARGS', 'ATTR_WRAPPED_EXCEPTIONS',
     'ATTR_WRAPPED_EXCEPTIONS_PROCESSOR', 'ATTR_EXPECTS_NAMESPACE_OBJECT',
     'PARSER_FORMATTER', 'DEFAULT_ARGUMENT_TEMPLATE', 'DEST_FUNCTION',
+    'PARSED_TYPEHINTS', 'ARG_DOC_DICT'
 )
 
 
@@ -39,12 +40,18 @@ ATTR_WRAPPED_EXCEPTIONS_PROCESSOR = 'argh_wrap_errors_processor'
 #: forcing argparse.Namespace object instead of signature introspection
 ATTR_EXPECTS_NAMESPACE_OBJECT = 'argh_expects_namespace_object'
 
+#: a dict {argname: infostr} to be used for adding --help info
+ARG_DOC_DICT = 'argh_doc_dict'
+
 #
 # Dest names in parser defaults
 #
 
 #: dest name for a function mapped to given endpoint (goes to Namespace obj)
 DEST_FUNCTION = 'function'
+
+#: list of type annotations to use for marking argument types
+PARSED_TYPEHINTS = [int, float, str, bool]
 
 #
 # Other library-wide stuff

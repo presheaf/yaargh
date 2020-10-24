@@ -28,6 +28,8 @@ from .constants import (
     PARSER_FORMATTER,
     DEFAULT_ARGUMENT_TEMPLATE,
     DEST_FUNCTION,
+    PARSED_TYPEHINTS,
+    ARG_DOC_DICT
 )
 from .utils import get_subparsers, get_arg_spec
 from .exceptions import AssemblingError
@@ -74,8 +76,7 @@ def _get_args_from_signature(function):
     if sys.version_info < (3,0):
         annotations = {}
     else:
-        annotations = dict((k,v) for k,v in function.__annotations__.items()
-                           if isinstance(v, str))
+        annotations = dict((k,v) for k,v in function.__annotations__.items())
 
     # define the list of conflicting option strings
     # (short forms, i.e. single-character ones)
@@ -89,8 +90,14 @@ def _get_args_from_signature(function):
         akwargs = {}  # keyword arguments for add_argument()
 
         if name in annotations:
-            # help message:  func(a : "b")  ->  add_argument("a", help="b")
-            akwargs.update(help=annotations.get(name))
+            val = annotations[name]
+
+            if isinstance(val, str):
+                # help message:  func(a : "b")  ->  add_argument("a", help="b")
+                akwargs.update(help=val)
+            elif val in PARSED_TYPEHINTS:
+                # typed arg:     func(a : int) -> add_argument("a", type=int)
+                akwargs.update(type=val)
 
         if name in defaults or name in kwonly:
             if name in defaults:
@@ -105,6 +112,10 @@ def _get_args_from_signature(function):
         else:
             # positional argument
             flags = (name,)
+
+        docdict = getattr(function, ARG_DOC_DICT, {})
+        if name in docdict:
+            akwargs.update(help=docdict[name])
 
         # cmd(foo_bar)  ->  add_argument('foo-bar')
         flags = tuple(x.replace('_', '-') if x.startswith('-') else x
